@@ -7,7 +7,7 @@ import (
 )
 
 func prefixSenderware(prefix string, in chan<- string) chan<- string {
-	out := make(chan string, len(in))
+	out := make(chan string, cap(in))
 	go func() {
 		defer close(out)
 		for data := range out {
@@ -19,7 +19,7 @@ func prefixSenderware(prefix string, in chan<- string) chan<- string {
 
 // This senderware will uppercase string from original input data
 func uppercaseSenderware(in chan<- string) chan<- string {
-	out := make(chan string, len(in))
+	out := make(chan string, cap(in))
 	go func() {
 		defer close(out)
 		for data := range out {

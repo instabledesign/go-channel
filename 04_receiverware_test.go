@@ -7,7 +7,7 @@ import (
 
 // This receiverware will append string from original input data
 func prefixReceiverware(prefix string, in <-chan string) <-chan string {
-	out := make(chan string, len(in))
+	out := make(chan string, cap(in))
 	go func() {
 		defer close(out)
 		// it will forward in data channel to out channel with prefix
@@ -20,7 +20,7 @@ func prefixReceiverware(prefix string, in <-chan string) <-chan string {
 
 // This receiverware will uppercase string from original input data
 func uppercaseReceiverware(in <-chan string) <-chan string {
-	out := make(chan string, len(in))
+	out := make(chan string, cap(in))
 	go func() {
 		defer close(out)
 		// it will forward in data channel to out channel with prefix

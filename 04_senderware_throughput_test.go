@@ -27,7 +27,7 @@ func throughputSenderware(in chan<- string, throughput *uint64) chan<- string {
 	}()
 
 	// we decorate the input channel
-	out := make(chan string, len(in))
+	out := make(chan string, cap(in))
 	go func() {
 		defer close(out)
 		for data := range out {

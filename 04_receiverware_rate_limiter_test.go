@@ -12,7 +12,7 @@ func rateLimiterReceiverware(in <-chan string, limit uint, interval time.Duratio
 	ticker := time.NewTicker(interval)
 
 	// we decorate the input channel
-	out := make(chan string, len(in))
+	out := make(chan string, cap(in))
 	go func() {
 		defer ticker.Stop()
 		defer close(out)
